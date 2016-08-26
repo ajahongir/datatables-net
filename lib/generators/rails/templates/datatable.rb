@@ -1,4 +1,4 @@
-class <%= datatable_name %> < AjaxDatatablesRails::Base
+class <%= datatable_name %> < DatatablesNet::Base
 
   def view_columns
     # Declare strings in this format: ModelName.column_name

@@ -1,4 +1,4 @@
-module AjaxDatatablesRails
+module DatatablesNet
   module Datatable
     class SimpleOrder
       attr_reader :datatable, :options

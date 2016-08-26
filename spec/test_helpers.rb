@@ -39,7 +39,7 @@ def sample_params
   )
 end
 
-class SampleDatatable < AjaxDatatablesRails::Base
+class SampleDatatable < DatatablesNet::Base
   def view_columns
     @view_columns ||= ['User.username', 'User.email', 'User.first_name', 'User.last_name']
   end

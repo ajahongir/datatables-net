@@ -1,4 +1,4 @@
-# ajax-datatables-rails
+# datatables-net
 
 [![Build Status](https://travis-ci.org/antillas21/ajax-datatables-rails.svg?branch=master)](https://travis-ci.org/antillas21/ajax-datatables-rails)
 [![Gem Version](https://badge.fury.io/rb/ajax-datatables-rails.svg)](http://badge.fury.io/rb/ajax-datatables-rails)
@@ -27,7 +27,7 @@ extracted a solution into a gem.
 
 ## ORM support
 
-Currently `AjaxDatatablesRails` only supports `ActiveRecord` as ORM for
+Currently `DatatablesNet` only supports `ActiveRecord` as ORM for
 performing database queries.
 
 Adding support for `Sequel`, `Mongoid` and `MongoMapper` is a planned feature
@@ -426,7 +426,7 @@ Example: what if the datatable is namespaced into an `Admin` module?
 
 ```ruby
 module Admin
-  class PurchasesDatatable < AjaxDatatablesRails::Base
+  class PurchasesDatatable < DatatablesNet::Base
   end
 end
 ```
@@ -487,7 +487,7 @@ Doing so, will create the `config/initializers/ajax_datatables_rails.rb` file
 with the following content:
 
 ```ruby
-AjaxDatatablesRails.configure do |config|
+DatatablesNet.configure do |config|
   # available options for db_adapter are: :pg, :mysql, :mysql2, :sqlite, :sqlite3, :oracle
   # config.db_adapter = :pg
 
@@ -515,7 +515,7 @@ method.
 To have these methods available to be used, this is the way to go:
 
 ```ruby
-class MyCustomDatatable < AjaxDatatablesRails::Base
+class MyCustomDatatable < DatatablesNet::Base
   # either define them one-by-one
   def_delegator :@view, :link_to
   def_delegator :@view, :h
@@ -540,11 +540,11 @@ end
 
 #### Options
 
-An `AjaxDatatablesRails::Base` inherited class can accept an options hash at
+An `DatatablesNet::Base` inherited class can accept an options hash at
 initialization. This provides room for flexibility when required. Example:
 
 ```ruby
-class UnrespondedMessagesDatatable < AjaxDatatablesRails::Base
+class UnrespondedMessagesDatatable < DatatablesNet::Base
   # customized methods here
 end
 
@@ -572,7 +572,7 @@ end
 
 #### Generator Syntax
 
-Also, a class that inherits from `AjaxDatatablesRails::Base` is not tied to an
+Also, a class that inherits from `DatatablesNet::Base` is not tied to an
 existing model, module, constant or any type of class in your Rails app.
 You can pass a name to your datatable class like this:
 

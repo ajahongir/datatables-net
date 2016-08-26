@@ -8,7 +8,7 @@ task :default => :spec
 task :console do
   require 'pry'
   require 'rails'
-  require 'ajax-datatables-rails'
+  require 'datatables-net'
   ARGV.clear
   Pry.start
 end

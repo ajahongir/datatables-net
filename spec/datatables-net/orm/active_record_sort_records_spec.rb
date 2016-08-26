@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe 'AjaxDatatablesRails::ORM::ActiveRecord#sort_records' do
+describe 'DatatablesNet::ORM::ActiveRecord#sort_records' do
   let(:view) { double('view', params: sample_params) }
   let(:datatable) { ComplexDatatable.new(view) }
 
   before(:each) do
-    AjaxDatatablesRails.configure do |config|
+    DatatablesNet.configure do |config|
       config.db_adapter = :sqlite
       config.orm = :active_record
     end

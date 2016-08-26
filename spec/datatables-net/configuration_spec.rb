@@ -1,23 +1,23 @@
 require 'spec_helper'
 
-describe AjaxDatatablesRails do
+describe DatatablesNet do
   describe "configurations" do
     context "configurable from outside" do
       before(:each) do
-        AjaxDatatablesRails.configure do |config|
+        DatatablesNet.configure do |config|
           config.db_adapter = :mysql
         end
       end
 
       it "should have custom value" do
-        expect(AjaxDatatablesRails.config.db_adapter).to eq(:mysql)
+        expect(DatatablesNet.config.db_adapter).to eq(:mysql)
       end
     end
   end
 end
 
-describe AjaxDatatablesRails::Configuration do
-  let(:config) { AjaxDatatablesRails::Configuration.new }
+describe DatatablesNet::Configuration do
+  let(:config) { DatatablesNet::Configuration.new }
 
   describe "default config" do
     it "default orm should :active_record" do

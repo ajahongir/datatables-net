@@ -1,26 +1,26 @@
 require 'spec_helper'
 
-describe AjaxDatatablesRails::Base do
+describe DatatablesNet::Base do
   describe 'an instance' do
     let(:view) { double('view', params: sample_params) }
 
     it 'requires a view_context' do
-      expect { AjaxDatatablesRails::Base.new }.to raise_error ArgumentError
+      expect { DatatablesNet::Base.new }.to raise_error ArgumentError
     end
 
     it 'accepts an options hash' do
-      datatable = AjaxDatatablesRails::Base.new(view, foo: 'bar')
+      datatable = DatatablesNet::Base.new(view, foo: 'bar')
       expect(datatable.options).to eq(foo: 'bar')
     end
   end
 
   context 'Public API' do
     let(:view) { double('view', params: sample_params) }
-    let(:datatable) { AjaxDatatablesRails::Base.new(view) }
+    let(:datatable) { DatatablesNet::Base.new(view) }
 
     describe '#view_columns' do
       it 'raises an error if not defined by the user' do
-        expect { datatable.view_columns }.to raise_error AjaxDatatablesRails::NotImplemented
+        expect { datatable.view_columns }.to raise_error DatatablesNet::NotImplemented
       end
 
       context 'child class implements view_columns' do
@@ -38,7 +38,7 @@ describe AjaxDatatablesRails::Base do
 
     describe '#data' do
       it 'raises an error if not defined by the user' do
-        expect { datatable.data }.to raise_error AjaxDatatablesRails::NotImplemented
+        expect { datatable.data }.to raise_error DatatablesNet::NotImplemented
       end
 
       context 'child class implements data' do
@@ -63,7 +63,7 @@ describe AjaxDatatablesRails::Base do
 
     describe '#get_raw_records' do
       it 'raises an error if not defined by the user' do
-        expect { datatable.get_raw_records }.to raise_error AjaxDatatablesRails::NotImplemented
+        expect { datatable.get_raw_records }.to raise_error DatatablesNet::NotImplemented
       end
     end
   end
@@ -73,7 +73,7 @@ describe AjaxDatatablesRails::Base do
     let(:datatable) { ComplexDatatable.new(view) }
 
     before(:each) do
-      allow_any_instance_of(AjaxDatatablesRails::Configuration).to receive(:orm) { nil }
+      allow_any_instance_of(DatatablesNet::Configuration).to receive(:orm) { nil }
     end
 
     describe 'fetch records' do
@@ -104,13 +104,13 @@ describe AjaxDatatablesRails::Base do
       describe '#offset' do
         it 'defaults to 0' do
           default_view = double('view', params: {})
-          datatable = AjaxDatatablesRails::Base.new(default_view)
+          datatable = DatatablesNet::Base.new(default_view)
           expect(datatable.datatable.send(:offset)).to eq(0)
         end
 
         it 'matches the value on view params[:start] minus 1' do
           paginated_view = double('view', params: { start: '11' })
-          datatable = AjaxDatatablesRails::Base.new(paginated_view)
+          datatable = DatatablesNet::Base.new(paginated_view)
           expect(datatable.datatable.send(:offset)).to eq(10)
         end
       end
@@ -118,20 +118,20 @@ describe AjaxDatatablesRails::Base do
       describe '#page' do
         it 'calculates page number from params[:start] and #per_page' do
           paginated_view = double('view', params: { start: '11' })
-          datatable = AjaxDatatablesRails::Base.new(paginated_view)
+          datatable = DatatablesNet::Base.new(paginated_view)
           expect(datatable.datatable.send(:page)).to eq(2)
         end
       end
 
       describe '#per_page' do
         it 'defaults to 10' do
-          datatable = AjaxDatatablesRails::Base.new(view)
+          datatable = DatatablesNet::Base.new(view)
           expect(datatable.datatable.send(:per_page)).to eq(10)
         end
 
         it 'matches the value on view params[:length]' do
           other_view = double('view', params: { length: 20 })
-          datatable = AjaxDatatablesRails::Base.new(other_view)
+          datatable = DatatablesNet::Base.new(other_view)
           expect(datatable.datatable.send(:per_page)).to eq(20)
         end
       end

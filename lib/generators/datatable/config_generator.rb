@@ -6,7 +6,7 @@ module Datatable
       source_root File.expand_path(File.join(File.dirname(__FILE__), 'templates'))
       desc <<DESC
 Description:
-  Creates an initializer file for AjaxDatatablesRails configuration at config/initializers.
+  Creates an initializer file for DatatablesNet configuration at config/initializers.
 DESC
 
       def copy_config_file

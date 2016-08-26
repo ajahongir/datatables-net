@@ -1,13 +1,8 @@
-module AjaxDatatablesRails
+module DatatablesNet
   class NotImplemented < StandardError; end
 
   class Base
     extend Forwardable
-<<<<<<< HEAD
-    include ActiveRecord::Sanitization::ClassMethods
-    class MethodNotImplementedError < StandardError; end
-=======
->>>>>>> v-0-4-0
 
     attr_reader :view, :options
     def_delegator :@view, :params, :params
@@ -19,7 +14,7 @@ module AjaxDatatablesRails
     end
 
     def config
-      @config ||= AjaxDatatablesRails.config
+      @config ||= DatatablesNet.config
     end
 
     def datatable
@@ -118,62 +113,6 @@ module AjaxDatatablesRails
       end
     end
 
-<<<<<<< HEAD
-    def new_search_condition(column, value)
-      model, column = column.split('.')
-      model = model.constantize
-      casted_column = ::Arel::Nodes::NamedFunction.new('CAST', [model.arel_table[column.to_sym].as(typecast)])
-      casted_column.matches("%#{sanitize_sql_like(value)}%")
-    end
-
-    def deprecated_search_condition(column, value)
-      model, column = column.split('.')
-      model = model.singularize.titleize.gsub( / /, '' ).constantize
-
-      casted_column = ::Arel::Nodes::NamedFunction.new('CAST', [model.arel_table[column.to_sym].as(typecast)])
-      casted_column.matches("%#{sanitize_sql_like(value)}%")
-    end
-
-    def aggregate_query
-      conditions = searchable_columns.each_with_index.map do |column, index|
-        value = params[:columns]["#{index}"][:search][:value] if params[:columns]
-        search_condition(column, value) unless value.blank?
-      end
-      conditions.compact.reduce(:and)
-    end
-
-    def typecast
-      case config.db_adapter
-      when :oracle then 'VARCHAR2(4000)'  
-      when :pg then 'VARCHAR'
-      when :mysql2 then 'CHAR'
-      when :sqlite3 then 'TEXT'
-      end
-    end
-
-    def offset
-      (page - 1) * per_page
-    end
-
-    def page
-      (params[:start].to_i / per_page) + 1
-    end
-
-    def per_page
-      params.fetch(:length, 10).to_i
-    end
-
-    def sort_column(item)
-      new_sort_column(item)
-    rescue
-      ::AjaxDatatablesRails::Base.deprecated '[DEPRECATED] Using table_name.column_name notation is deprecated. Please refer to: https://github.com/antillas21/ajax-datatables-rails#searchable-and-sortable-columns-syntax'
-      deprecated_sort_column(item)
-    end
-
-    def deprecated_sort_column(item)
-      sortable_columns[sortable_displayed_columns.index(item[:column])]
-    end
-=======
     def raw_records_error_text
       return <<-eos
 
@@ -184,7 +123,6 @@ module AjaxDatatablesRails
 
     def data_error_text
       return <<-eos
->>>>>>> v-0-4-0
 
         You should implement this method in your class and return an array
         of arrays, or an array of hashes, as defined in the jQuery.dataTables

@@ -1,4 +1,4 @@
-module AjaxDatatablesRails
+module DatatablesNet
   module Datatable
     class Column
       attr_reader :datatable, :index, :options
@@ -67,7 +67,7 @@ module AjaxDatatablesRails
       end
 
       def config
-        @config ||= AjaxDatatablesRails.config
+        @config ||= DatatablesNet.config
       end
 
       def regex_search

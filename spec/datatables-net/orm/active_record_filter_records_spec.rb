@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe 'AjaxDatatablesRails::ORM::ActiveRecord#filter_records' do
+describe 'DatatablesNet::ORM::ActiveRecord#filter_records' do
   let(:view) { double('view', params: sample_params) }
   let(:datatable) { ComplexDatatable.new(view) }
 
   before(:each) do
-    AjaxDatatablesRails.configure do |config|
+    DatatablesNet.configure do |config|
       config.db_adapter = :sqlite
       config.orm = :active_record
     end
@@ -121,32 +121,32 @@ describe 'AjaxDatatablesRails::ORM::ActiveRecord#filter_records' do
       let(:column) { ComplexDatatable.new(view).datatable.columns.first }
 
       it 'returns VARCHAR if :db_adapter is :pg' do
-        allow_any_instance_of(AjaxDatatablesRails::Configuration).to receive(:db_adapter) { :pg }
+        allow_any_instance_of(DatatablesNet::Configuration).to receive(:db_adapter) { :pg }
         expect(column.send(:typecast)).to eq('VARCHAR')
       end
 
       it 'returns VARCHAR if :db_adapter is :postgre' do
-        allow_any_instance_of(AjaxDatatablesRails::Configuration).to receive(:db_adapter) { :postgre }
+        allow_any_instance_of(DatatablesNet::Configuration).to receive(:db_adapter) { :postgre }
         expect(column.send(:typecast)).to eq('VARCHAR')
       end
 
       it 'returns CHAR if :db_adapter is :mysql2' do
-        allow_any_instance_of(AjaxDatatablesRails::Configuration).to receive(:db_adapter) { :mysql2 }
+        allow_any_instance_of(DatatablesNet::Configuration).to receive(:db_adapter) { :mysql2 }
         expect(column.send(:typecast)).to eq('CHAR')
       end
 
       it 'returns CHAR if :db_adapter is :mysql' do
-        allow_any_instance_of(AjaxDatatablesRails::Configuration).to receive(:db_adapter) { :mysql }
+        allow_any_instance_of(DatatablesNet::Configuration).to receive(:db_adapter) { :mysql }
         expect(column.send(:typecast)).to eq('CHAR')
       end
 
       it 'returns TEXT if :db_adapter is :sqlite' do
-        allow_any_instance_of(AjaxDatatablesRails::Configuration).to receive(:db_adapter) { :sqlite }
+        allow_any_instance_of(DatatablesNet::Configuration).to receive(:db_adapter) { :sqlite }
         expect(column.send(:typecast)).to eq('TEXT')
       end
 
       it 'returns TEXT if :db_adapter is :sqlite3' do
-        allow_any_instance_of(AjaxDatatablesRails::Configuration).to receive(:db_adapter) { :sqlite3 }
+        allow_any_instance_of(DatatablesNet::Configuration).to receive(:db_adapter) { :sqlite3 }
         expect(column.send(:typecast)).to eq('TEXT')
       end
     end

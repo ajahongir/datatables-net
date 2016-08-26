@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'AjaxDatatablesRails::Datatable::Column' do
+describe 'DatatablesNet::Datatable::Column' do
   let(:view) { double('view', params: sample_params) }
   let(:datatable) { ComplexDatatable.new(view) }
   before {
@@ -25,7 +25,7 @@ describe 'AjaxDatatablesRails::Datatable::Column' do
 
       context '#search' do
         it 'child class' do
-          expect(column.search).to be_a(AjaxDatatablesRails::Datatable::SimpleSearch)
+          expect(column.search).to be_a(DatatablesNet::Datatable::SimpleSearch)
         end
 
         it 'should have search value' do

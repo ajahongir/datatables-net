@@ -1,10 +1,10 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'ajax-datatables-rails/version'
+require 'datatables-net/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "ajax-datatables-rails"
-  gem.version       = AjaxDatatablesRails::VERSION
+  gem.name          = "datatables-net"
+  gem.version       = DatatablesNet::VERSION
   gem.authors       = ["Joel Quenneville"]
   gem.email         = ["joel.quenneville@collegeplus.org"]
   gem.description   = %q{A gem that simplifies using datatables and hundreds of records via ajax}

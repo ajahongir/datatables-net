@@ -1,4 +1,4 @@
-AjaxDatatablesRails.configure do |config|
+DatatablesNet.configure do |config|
   # available options for db_adapter are: :pg, :mysql, :mysql2, :sqlite, :sqlite3, :oracle
   # config.db_adapter = :pg
 

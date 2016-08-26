@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe 'AjaxDatatablesRails::Datatable::SimpleSearch' do
+describe 'DatatablesNet::Datatable::SimpleSearch' do
   let(:options) { ActiveSupport::HashWithIndifferentAccess.new({"value"=>"search value", "regex"=>"true"}) }
-  let(:simple_search) { AjaxDatatablesRails::Datatable::SimpleSearch.new options }
+  let(:simple_search) { DatatablesNet::Datatable::SimpleSearch.new options }
 
   describe 'option methods' do
     it 'regexp?' do

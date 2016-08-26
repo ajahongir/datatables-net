@@ -1,4 +1,4 @@
-module AjaxDatatablesRails
+module DatatablesNet
   module Datatable
     class SimpleSearch
       attr_reader :options

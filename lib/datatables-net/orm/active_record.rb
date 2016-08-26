@@ -1,4 +1,4 @@
-module AjaxDatatablesRails
+module DatatablesNet
   module ORM
     module ActiveRecord
 

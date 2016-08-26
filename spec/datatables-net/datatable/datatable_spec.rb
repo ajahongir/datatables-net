@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe 'AjaxDatatablesRails::Datatable::Datatable' do
+describe 'DatatablesNet::Datatable::Datatable' do
   let(:view) { double('view', params: sample_params) }
   let(:datatable) { ComplexDatatable.new(view).datatable }
   let(:order_option) { {"0"=>{"column"=>"0", "dir"=>"asc"}, "1"=>{"column"=>"1", "dir"=>"desc"}} }
 
   before(:each) do
-    AjaxDatatablesRails.configure do |config|
+    DatatablesNet.configure do |config|
       config.db_adapter = :sqlite
       config.orm = :active_record
     end
@@ -39,7 +39,7 @@ describe 'AjaxDatatablesRails::Datatable::Datatable' do
       end
 
       it 'child class' do
-        expect(datatable.orders.first).to be_a(AjaxDatatablesRails::Datatable::SimpleOrder)
+        expect(datatable.orders.first).to be_a(DatatablesNet::Datatable::SimpleOrder)
       end
     end
 
@@ -55,7 +55,7 @@ describe 'AjaxDatatablesRails::Datatable::Datatable' do
       end
 
       it 'child class' do
-        expect(datatable.search).to be_a(AjaxDatatablesRails::Datatable::SimpleSearch)
+        expect(datatable.search).to be_a(DatatablesNet::Datatable::SimpleSearch)
       end
 
     end
@@ -66,7 +66,7 @@ describe 'AjaxDatatablesRails::Datatable::Datatable' do
       end
 
       it 'child class' do
-        expect(datatable.columns.first).to be_a(AjaxDatatablesRails::Datatable::Column)
+        expect(datatable.columns.first).to be_a(DatatablesNet::Datatable::Column)
       end
 
     end

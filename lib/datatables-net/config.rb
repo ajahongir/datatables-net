@@ -1,18 +1,18 @@
 require 'active_support/configurable'
 
-module AjaxDatatablesRails
+module DatatablesNet
 
-  # configure AjaxDatatablesRails global settings
-  #   AjaxDatatablesRails.configure do |config|
+  # configure DatatablesNet global settings
+  #   DatatablesNet.configure do |config|
   #     config.db_adapter = :pg
   #   end
   def self.configure &block
-    yield @config ||= AjaxDatatablesRails::Configuration.new
+    yield @config ||= DatatablesNet::Configuration.new
   end
 
-  # AjaxDatatablesRails global settings
+  # DatatablesNet global settings
   def self.config
-    @config ||= AjaxDatatablesRails::Configuration.new
+    @config ||= DatatablesNet::Configuration.new
   end
 
   class Configuration
