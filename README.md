@@ -19,7 +19,7 @@ and search your html tables. When dealing with large tables
 These can be fixed by using server-side pagination, but this breaks some
 datatables functionality.
 
-`ajax-datatables-rails` is a wrapper around datatable's ajax methods that allow
+`datatables-net` is a wrapper around datatable's ajax methods that allow
 synchronization with server-side pagination in a rails app. It was inspired by
 this [Railscast](http://railscasts.com/episodes/340-datatables). I needed to
 implement a similar solution in a couple projects I was working on, so I
@@ -32,7 +32,7 @@ performing database queries.
 
 Adding support for `Sequel`, `Mongoid` and `MongoMapper` is a planned feature
 for this gem. If you'd be interested in contributing to speed development,
-please [open an issue](https://github.com/antillas21/ajax-datatables-rails/issues/new)
+please [open an issue](https://github.com/ajahongir/datatables-net/issues/new)
 and get in touch.
 
 ## Installation
@@ -40,7 +40,7 @@ and get in touch.
 Add these lines to your application's Gemfile:
 
     gem 'jquery-datatables-rails'
-    gem 'ajax-datatables-rails'
+    gem 'datatables-net'
 
 And then execute:
 
@@ -168,7 +168,7 @@ end
 In the example above, we use the same sequence of column declarations as in
 `sortable_columns`. This ordering is important! And as of 0.3.0, the first
 column must be a sortable column. For more, see
-[this issue](https://github.com/antillas21/ajax-datatables-rails/issues/83).
+[this issue](https://github.com/ajahongir/ajax-datatables-rails/issues/83).
 
 [See here](#using-view-helpers) if you need to use view helpers in the
 returned 2D array, like `link_to`, `mail_to`, `resource_path`, etc.
