@@ -1,14 +1,14 @@
 # datatables-net
 
-[![Build Status](https://travis-ci.org/antillas21/ajax-datatables-rails.svg?branch=master)](https://travis-ci.org/antillas21/ajax-datatables-rails)
-[![Gem Version](https://badge.fury.io/rb/ajax-datatables-rails.svg)](http://badge.fury.io/rb/ajax-datatables-rails)
-[![Code Climate](https://codeclimate.com/github/antillas21/ajax-datatables-rails/badges/gpa.svg)](https://codeclimate.com/github/antillas21/ajax-datatables-rails)
+[![Build Status](https://travis-ci.org/ajahongir/datatables-net.svg?branch=master)](https://travis-ci.org/ajahongir/datatables-net)
+[![Gem Version](https://badge.fury.io/rb/datatables-net.svg)](http://badge.fury.io/rb/datatables-net)
+[![Code Climate](https://codeclimate.com/github/ajahongir/datatables-net/badges/gpa.svg)](https://codeclimate.com/github/ajahongir/datatables-net)
 
 > __Important__
 >
 > [Datatables](http://datatables.net) recently released version 1.10 (which includes a new API and features) and deprecated version 1.9.
 >
-> This gem is targeted at Datatables version 1.10 and up.
+> This gem is targeted at Datatables version 1.10 and later.
 
 
 ## Description
@@ -23,7 +23,7 @@ datatables functionality.
 synchronization with server-side pagination in a rails app. It was inspired by
 this [Railscast](http://railscasts.com/episodes/340-datatables). I needed to
 implement a similar solution in a couple projects I was working on, so I
-extracted a solution into a gem.
+extracted a solution into a gem. This gem is suppoy
 
 ## ORM support
 
@@ -47,7 +47,7 @@ And then execute:
     $ bundle
 
 The `jquery-datatables-rails` gem is listed as a convenience, to ease adding
-jQuery dataTables to your Rails project. You can always add the plugin assets
+jQuery DataTables to your Rails project. You can always add the plugin assets
 manually via the assets pipeline. If you decide to use the
 `jquery-datatables-rails` gem, please refer to its installation instructions
 [here](https://github.com/rweng/jquery-datatables-rails).
@@ -88,16 +88,17 @@ Something like this:
 * Set up an html `<table>` with a `<thead>` and `<tbody>`
 * Add in your table headers if desired
 * Don't add any rows to the body of the table, datatables does this automatically
-* Add a data attribute to the `<table>` tag with the url of the JSON feed, in our case is the `users_path` as we're pointing to the `UsersController#index` action
+* Add a data attribute to the `<table>` tag with the url of the JSON feed, in our case is the `cities_path` as we're pointing to the `UsersController#index` action
 
 
 ```html
-<table id="users-table", data-source="<%= users_path(format: :json) %>">
+<table id="cities-table", data-source="<%= cities_path(format: :json) %>">
   <thead>
     <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Brief Bio</th>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Created At</th>
+      <th>Country</th>
     </tr>
   </thead>
   <tbody>
@@ -246,14 +247,14 @@ Contact, Competency and CompetencyType` models. We want to have a datatables
 report which has the following column:
 
 ```ruby
-        'coursetypes.name',
-        'courses.name',
-        'events.title',
-        'events.event_start',
-        'events.event_end',
-        'contacts.full_name',
-        'competency_types.name',
-        'events.status'
+'coursetypes.name',
+'courses.name',
+'events.title',
+'events.event_start',
+'events.event_end',
+'contacts.full_name',
+'competency_types.name',
+'events.status'
 ```
 
 We want to sort and search on all columns of the list. The related definition
@@ -263,14 +264,14 @@ would be:
 
   def view_columns
     @view_columns ||= [
-        'Coursetype.name',
-        'Course.name',
-        'Event.title',
-        'Event.event_start',
-        'Event.event_end',
-        'Contact.last_name',
-        'CompetencyType.name',
-        'Event.status'
+      'Coursetype.name',
+      'Course.name',
+      'Event.title',
+      'Event.event_start',
+      'Event.event_end',
+      'Contact.last_name',
+      'CompetencyType.name',
+      'Event.status'
     ]
   end
 
@@ -347,7 +348,7 @@ Don't forget to make sure the proper route has been added to `config/routes.rb`.
 The resulting view may look like this:
 
 ```html
-<table id="users-table" data-source="<%= users_path(format: :json) %>">
+<table id="cities-table" data-source="<%= cities_path(format: :json) %>">
   <thead>
     <tr>
       <th>First Name</th>
@@ -364,30 +365,30 @@ The resulting view may look like this:
 Finally, the javascript to tie this all together. In the appropriate `coffee` file:
 
 ```coffeescript
-# users.coffee
+# cities.coffee
 
 $ ->
-  $('#users-table').dataTable
+  $('#cities-table').DataTable
     processing: true
     serverSide: true
-    ajax: $('#users-table').data('source')
-    pagingType: 'full_numbers'
-    # optional, if you want full pagination controls.
+    searching: true
+    ordering: true
+    deferRender: true
+    ajax: $('#cities-table').data('source')
+    lengthMenu: [10, 25, 50, 100]
     # Check dataTables documentation to learn more about
     # available options.
 ```
 
 or, if you're using plain javascript:
 ```javascript
-// users.js
+// cities.js
 
 jQuery(document).ready(function() {
-  $('#users-table').dataTable({
+  $('#cities-table').DataTable({
     "processing": true,
     "serverSide": true,
-    "ajax": $('#users-table').data('source'),
-    "pagingType": "full_numbers",
-    // optional, if you want full pagination controls.
+    "ajax": $('#cities-table').data('source'),
     // Check dataTables documentation to learn more about
     // available options.
   });
@@ -398,10 +399,10 @@ jQuery(document).ready(function() {
 
 #### Columns syntax
 
-Since version `0.3.0`, we are implementing a pseudo code way of declaring
-the array columns to use when querying the database.
+Since version `0.4.0`, we are implementing a pseudo code way of declaring
+the hash of columns to use when querying the database.
 
-Example. Suppose we have the following models: `User`, `PurchaseOrder`,
+Example. Suppose we have the following models: `City`, `PurchaseOrder`,
 `Purchase::LineItem` and we need to have several columns from those models
 available in our datatable to search and sort by.
 
@@ -409,15 +410,15 @@ available in our datatable to search and sort by.
 # we use the ModelName.column_name notation to declare our columns
 
 def view_columns
-  @view_columns ||= [
-    'User.first_name',
-    'User.last_name',
-    'PurchaseOrder.number',
-    'PurchaseOrder.created_at',
-    'Purchase::LineItem.quantity',
-    'Purchase::LineItem.unit_price',
-    'Purchase::LineItem.item_total'
-  ]
+  @view_columns ||= {
+    first_name: 'User.first_name',
+    last_name: 'User.last_name',
+    number: 'PurchaseOrder.number',
+    created_at: 'PurchaseOrder.created_at',
+    quantity: 'Purchase::LineItem.quantity',
+    unit_price: 'Purchase::LineItem.unit_price',
+    item_total: 'Purchase::LineItem.item_total'
+  }
 end
 ```
 
@@ -435,15 +436,15 @@ Taking the same models and columns, we would define it like this:
 
 ```ruby
 def view_columns
-  @view_columns ||= [
-    '::User.first_name',
-    '::User.last_name',
-    '::PurchaseOrder.number',
-    '::PurchaseOrder.created_at',
-    '::Purchase::LineItem.quantity',
-    '::Purchase::LineItem.unit_price',
-    '::Purchase::LineItem.item_total'
-  ]
+  @view_columns ||= {
+    first_name: '::User.first_name',
+    last_name: '::User.last_name',
+    number: '::PurchaseOrder.number',
+    created_at: '::PurchaseOrder.created_at',
+    quantity: '::Purchase::LineItem.quantity',
+    unit_price: '::Purchase::LineItem.unit_price',
+    item_total: '::Purchase::LineItem.item_total'
+  }
 end
 ```
 
@@ -483,7 +484,7 @@ To use the generator, from the terminal execute:
 $ bundle exec rails generate datatable:config
 ```
 
-Doing so, will create the `config/initializers/ajax_datatables_rails.rb` file
+Doing so, will create the `config/initializers/datatables_net.rb` file
 with the following content:
 
 ```ruby
@@ -528,11 +529,11 @@ class MyCustomDatatable < DatatablesNet::Base
   # example: mapping the 2d jsonified array returned.
   def data
     records.map do |record|
-      [
-        link_to(record.fname, edit_resource_path(record)),
-        mail_to(record.email),
+      {
+        fname: link_to(record.fname, edit_resource_path(record)),
+        email: mail_to(record.email),
         # other attributes
-      ]
+      }
     end
   end
 end
@@ -578,14 +579,14 @@ You can pass a name to your datatable class like this:
 
 
 ```
-$ rails generate datatable users
-# returns a users_datatable.rb file with a UsersDatatable class
+$ rails generate datatable user
+# returns a user_datatable.rb file with a UserDatatable class
 
 $ rails generate datatable contact_messages
-# returns a contact_messages_datatable.rb file with a ContactMessagesDatatable class
+# returns a contact_message_datatable.rb file with a ContactMessageDatatable class
 
-$ rails generate datatable UnrespondedMessages
-# returns an unresponded_messages_datatable.rb file with an UnrespondedMessagesDatatable class
+$ rails generate datatable UnrespondedMessage
+# returns an unresponded_message_datatable.rb file with an UnrespondedMessageDatatable class
 ```
 
 
@@ -595,20 +596,11 @@ database.
 
 ## Tutorial
 
-Tutorial for Integrating `ajax-datatable-rails`, on  Rails 4.
-
-__version 0.3.0:__
-
-[Part-1  The-Installation](https://github.com/antillas21/ajax-datatables-rails/wiki/Part-1----The-Installation)
-
-[Part 2 The Datatables with ajax functionality](https://github.com/antillas21/ajax-datatables-rails/wiki/Part-2-The-Datatables-with-ajax-functionality)
-
-The complete project code for this tutorial series is available on [github](https://github.com/trkrameshkumar/simple_app).
+Tutorial for Integrating `datatable-net`, on  Rails 3.2, 4.x, 5
 
 __version 0.4.0:__
 
-Another sample project [code](https://github.com/ajahongir/ajax-datatables-rails-v-0-4-0-how-to). Its real world example.
-
+How-to sample project [code](https://github.com/ajahongir/ajax-datatables-rails-v-0-4-0-how-to). Its real world example.
 ## Contributing
 
 1. Fork it

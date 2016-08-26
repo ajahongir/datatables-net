@@ -6,7 +6,7 @@ module DatatablesNet
   #   DatatablesNet.configure do |config|
   #     config.db_adapter = :pg
   #   end
-  def self.configure &block
+  def self.configure
     yield @config ||= DatatablesNet::Configuration.new
   end
 
