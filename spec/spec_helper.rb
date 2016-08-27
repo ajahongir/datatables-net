@@ -1,7 +1,7 @@
 require 'pry'
 require 'rails'
 require 'active_record'
-require 'ajax-datatables-rails'
+require 'datatables-net'
 
 ActiveRecord::Base.establish_connection adapter: "sqlite3", database: ":memory:"
 

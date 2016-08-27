@@ -10,7 +10,7 @@ Description:
 DESC
 
       def copy_config_file
-        template 'ajax_datatables_rails_config.rb', 'config/initializers/ajax_datatables_rails.rb'
+        template 'datatables_net_config.rb', 'config/initializers/datatables_net_config.rb'
       end
     end
   end
