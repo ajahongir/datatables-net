@@ -38,10 +38,10 @@ and get in touch.
 ## Installation
 
 Add these lines to your application's Gemfile:
-
-    gem 'jquery-datatables-rails'
-    gem 'datatables-net'
-
+```ruby
+  gem 'jquery-datatables-rails'
+  gem 'datatables-net'
+```
 And then execute:
 
     $ bundle
@@ -52,7 +52,7 @@ manually via the assets pipeline. If you decide to use the
 `jquery-datatables-rails` gem, please refer to its installation instructions
 [here](https://github.com/rweng/jquery-datatables-rails).
 
-## Usage (0.3.x)
+## Usage
 *The following examples assume that we are setting up ajax-datatables-rails for
 an index page of users from a `User` model, and that we are using postgresql as
 our db, because you __should be using it__, if not, please refer to the
@@ -62,7 +62,7 @@ entry in the Additional Notes section.*
 ### Generate
 Run the following command:
 
-    $ rails generate datatable User
+    $ rails generate datatable City
 
 
 This will generate a file named `user_datatable.rb` in `app/datatables`.
@@ -70,19 +70,17 @@ Open the file and customize in the functions as directed by the comments.
 
 Take a look [here](#generator-syntax) for an explanation about the generator syntax.
 
-
-
 ### Build the View
 
 You should always start by the single source of truth, which is your html view. Suppose we need to render a users table and display: first name, last name, and bio for each user.
 
 Something like this:
 
-|First Name|Last Name|Brief Bio|
-|----------|---------|---------|
-|John|Doe|Is your default user everywhere|
-|Jane|Doe|Is John's wife|
-|James|Doe|Is John's brother and best friend|
+|Id|Name|Created At|Country|
+|----------|---------|---------|---------|
+|1|London|2016/01/02|Great Britain|
+|2|Singapore|2016/01/02|Singapore|
+|3|New York|2016/01/02|United States|
 
 
 * Set up an html `<table>` with a `<thead>` and `<tbody>`
