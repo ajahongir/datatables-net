@@ -61,7 +61,7 @@ module DatatablesNet
 
     def searchable_columns
       @searchable_columns ||= begin
-        connected_columns.select &:searchable?
+        connected_columns.select(&:searchable?)
       end
     end
 
