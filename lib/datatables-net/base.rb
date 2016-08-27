@@ -21,7 +21,8 @@ module DatatablesNet
       @datatable ||= Datatable::Datatable.new self
     end
 
-    # Must overrited methods
+    # ----------------- must overrited methods --------------------
+
     def view_columns
       fail(NotImplemented, view_columns_error_text)
     end
@@ -33,6 +34,8 @@ module DatatablesNet
     def get_raw_records
       fail(NotImplemented, raw_records_error_text)
     end
+
+    # ----------------- end --------------------
 
     def as_json
       {
@@ -54,7 +57,8 @@ module DatatablesNet
       @records ||= retrieve_records
     end
 
-    # helper methods
+    # ----------------- helper methods --------------------
+
     def searchable_columns
       @searchable_columns ||= begin
         connected_columns.select &:searchable?
@@ -74,6 +78,8 @@ module DatatablesNet
         end.compact
       end
     end
+
+    # ----------------- end --------------------
 
     private
     # view_columns can be an Array or Hash. we have to support all these formats of defining columns

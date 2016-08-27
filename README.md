@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.org/ajahongir/datatables-net.svg?branch=master)](https://travis-ci.org/ajahongir/datatables-net)
 [![Gem Version](https://badge.fury.io/rb/datatables-net.svg)](http://badge.fury.io/rb/datatables-net)
 [![Code Climate](https://codeclimate.com/github/ajahongir/datatables-net/badges/gpa.svg)](https://codeclimate.com/github/ajahongir/datatables-net)
+[![Test Coverage](https://codeclimate.com/github/ajahongir/datatables-net/badges/coverage.svg)](https://codeclimate.com/github/ajahongir/datatables-net/coverage)
+[![Issue Count](https://codeclimate.com/github/ajahongir/datatables-net/badges/issue_count.svg)](https://codeclimate.com/github/ajahongir/datatables-net)
 
 > __Important__
 >
@@ -54,7 +56,7 @@ manually via the assets pipeline. If you decide to use the
 
 ## Usage
 *The following examples assume that we are setting up ajax-datatables-rails for
-an index page of users from a `User` model, and that we are using postgresql as
+an index page of users from a `City` model, and that we are using postgresql as
 our db, because you __should be using it__, if not, please refer to the
 [Searching on non text-based columns](#searching-on-non-text-based-columns)
 entry in the Additional Notes section.*
