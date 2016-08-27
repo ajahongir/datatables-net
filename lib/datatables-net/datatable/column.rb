@@ -32,7 +32,7 @@ module DatatablesNet
         @view_column[:cond] || :like
       end
 
-      def filter value
+      def filter
         @view_column[:cond].call self
       end
 
@@ -77,7 +77,7 @@ module DatatablesNet
       def non_regex_search
         case cond
         when Proc
-          filter search.value
+          filter
         when :eq, :not_eq, :lt, :gt, :lteq, :gteq, :in
           if custom_field?
             ::Arel::Nodes::SqlLiteral.new(field).eq(search.value)
